@@ -77,3 +77,30 @@ def Login3(request):
         return render(request, 'Login.HTML')
 
 
+
+
+
+
+def Login4(request):
+    '''
+    處理請求數據
+    GET时将if request.method == 'GET':，将两段注释放开
+    中文编码问题，'中国' 中的ascii 字符码，而不是真正的中文。
+    这是因为json.dumps 序列化时对中文默认使用的ascii编码.
+    想输出真正的中文需要指定ensure_ascii=False：
+    :param request:
+    :return:
+    '''
+
+    if request.method == 'POST':
+        result = {}
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # data = request.POST.get('data')
+        result['username'] = username
+        result['pd'] = password
+        # result['data'] = data
+        result = json.dumps(result,ensure_ascii=False)
+        return HttpResponse(result,content_type='application/json;charset=utf-8')
+    else:
+        return render(request, 'Login.HTML')
