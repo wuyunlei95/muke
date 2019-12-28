@@ -37,6 +37,9 @@ def Login1(request):
         # return render(request, 'Login.HTML')
 
 
+
+
+
 def Login2(request):
     '''
     GET请求
